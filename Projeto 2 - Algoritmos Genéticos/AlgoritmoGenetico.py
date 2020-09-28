@@ -12,27 +12,16 @@ class AlgoritmoGenetico():
     def __init__(self):
         self.taxaCrossover = 0
         self.taxaMutacao = 0
-        self.geracoes = 0
+        self.geracoes = 100
         self.numPopulacao = 100
         self.populacao = None
-        self.roletaSelecao = []
     
     def executarAG(self):
         pass
     
-    ''' Organiza a população em ordem decrescente da porcentagem de fitness para determinar
-    a faixa da roleta. '''
+    ''' Sorteia número que irá escolher os pais na roleta para o crossover. '''
     def roleta(self):
-        self.populacao = sorted(self.populacao.getListaDeIndividuos(), key = Individuo.getFitnessPercent(), reverse=True)
-        
-        valorSomaFitnessMinimo = 0
-        valorSomaFitnessMaximo = 0
-        for individuo in self.populacao.getListaDeIndividuos():
-            fitnessPercentAtual = individuo.getFitnessPercent()
-            valorSomaFitnessMaximo = valorSomaFitnessMaximo + fitnessPercentAtual
-            individuo.setFaixaRoleta(valorSomaFitnessMinimo, valorSomaFitnessMaximo)
-            
-            valorSomaFitnessMinimo = valorSomaFitnessMinimo + fitnessPercentAtual
+        return random()*100
             
     
     def crossover(self, individuo_1, individuo_2):

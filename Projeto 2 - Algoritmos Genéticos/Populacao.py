@@ -11,6 +11,7 @@ class Populacao():
     
     def __init__(self):
         self.listaDeIndividuos = []
+        self.mediaPopulacao = 0
             
     ''' Cria uma população de individuos. a quantidade de individuos é recebida por parâmetro. '''
     def setListaDeIndividuos(self, numPopulacao):
@@ -24,24 +25,36 @@ class Populacao():
     para calcular o fitness percent. '''
     def calcularFitness(self):
         fitnessTotal = 0
-        x = 0
 
         for individuo in self.listaDeIndividuos:
-             y = round(100 + (x - math.sin(math.sqrt(abs(x)))))
-             individuo.setFitness(y)
-             fitnessTotal = fitnessTotal + y
+            x = individuo.getFenotipo()
+            y = round(100 + (x - math.sin(math.sqrt(abs(x)))))
+            individuo.setFitness(y)
+            fitnessTotal = fitnessTotal + y
         
         for individuo in self.listaDeIndividuos:
             individuo.setFitnessPercent(self.calcularFitnessPercent(individuo.getFitness, fitnessTotal))
     
+    ''' Calcula e retorna a porcentagem do fitness. '''
     def calcularFitnessPercent(self, fitness, fitnessTotal):
         return (fitness*100)/fitnessTotal
     
+    ''' Organiza a população em ordem decrescente da porcentagem de fitness para determinar
+    a faixa da roleta. '''
     def calcularRangeRoleta(self):
-        pass
+        self.listaDeIndividuos = sorted(self.getListaDeIndividuos(), key = Individuo.getFitnessPercent(), reverse=True)
+        
+        valorSomaFitnessMinimo = 0
+        valorSomaFitnessMaximo = 0
+        for individuo in self.getListaDeIndividuos():
+            fitnessPercentAtual = individuo.getFitnessPercent()
+            valorSomaFitnessMaximo = valorSomaFitnessMaximo + fitnessPercentAtual
+            individuo.setFaixaRoleta(valorSomaFitnessMinimo, valorSomaFitnessMaximo)
+            
+            valorSomaFitnessMinimo = valorSomaFitnessMinimo + fitnessPercentAtual
     
     def getMediaPopulacao(self):
-        pass
-    
+        return self.mediaPopulacao
+
     def printPopulacao(self):
-        pass
+        print('Média da população: ' + self.mediaPopulacao)
