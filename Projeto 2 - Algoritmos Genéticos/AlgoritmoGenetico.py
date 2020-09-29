@@ -4,7 +4,8 @@ Created on Fri Sep 25 17:47:46 2020
 
 @author: adlla
 """
-from Individuo import Individuo
+#import Individuo as ind
+#Individuo = ind.Individuo()
 import Populacao as pop
 
 from random import random
@@ -15,13 +16,14 @@ class AlgoritmoGenetico():
         self.taxaCrossover = 0
         self.taxaMutacao = 0
         self.geracoes = 100
-        self.numPopulacao = 100
-        self.populacao = None
+        self.numPopulacao = 5
+        print('1')
+        self.populacao = pop.Populacao(self.numPopulacao)
+        print('AG')
     
     def executarAG(self):
-        self.populacao = pop.Populacao()
-        self.populacao.setListaDeIndividuos(self.numPopulacao)
-        self.populacao.calcularFitness()
+        self.populacao.calcularRangeRoleta()
+        self.populacao.printPopulacao()
         
         
 
@@ -30,7 +32,7 @@ class AlgoritmoGenetico():
         return random()*100
             
     
-    def crossover(self, individuo_1, individuo_2):
+    '''def crossover(self, individuo_1, individuo_2):
         pontoCorte = round(random() + len(individuo_1.getCromossomo))
         
         filho_1 = individuo_2.getCromossomo[0:pontoCorte] + individuo_1.getCromossomo[pontoCorte::]
@@ -46,14 +48,11 @@ class AlgoritmoGenetico():
         
         return filhos
         
-
+    '''
+    
     def mutacao(self, individuo):
-        for i in range(len(individuo.cromossomo)):
-            if random() < self.taxaMutacao:
-                if individuo.cromossomo[i] == '1':
-                    individuo.cromossomo[i] = '0'
-                else:
-                    individuo.cromossomo[i] = '1'
+        pass
 
-if '__name__' == '__main__':
-    pass
+
+AG = AlgoritmoGenetico()
+AG.executarAG()

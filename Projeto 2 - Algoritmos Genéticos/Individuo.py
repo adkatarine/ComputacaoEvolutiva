@@ -5,9 +5,8 @@ Created on Fri Sep 25 17:46:32 2020
 @author: adlla
 """
 from random import random
-import math
 
-class Individuo():
+class Individuo:
     
     def __init__(self):
         self.cromossomo = []
@@ -15,19 +14,19 @@ class Individuo():
         self.geracao = 0
         self.fitness = 0
         self.fitnessPercent = 0
-        self.faixaRoleta = 0
+        self.faixaRoleta = []
         
-        for i in range(8):
-            if(random() < 0.5):
-                self.cromossomo.append('0')
-            else:
-                self.cromossomo.append('1')
-        self.setFenotipo(self.cromossomo)
+        self.setCromossomo()
     
     ''' Inicia o cromossomo com 8 genes e valores aleatórios. '''
-    def setCromossomo(self, cromossomo):
-        self.cromossomo = cromossomo
+    def setCromossomo(self):
+        for i in range(3):
+            if(random() < 0.5):
+                self.cromossomo.append(0)
+            else:
+                self.cromossomo.append(1)
         self.setFenotipo(self.cromossomo)
+        #print('INDIVIDUO CRIADO')
     
     def getCromossomo(self):
         return self.cromossomo
@@ -63,14 +62,26 @@ class Individuo():
         return self.fitnessPercent
     
     def setFaixaRoleta(self, faixaRoleta_1, faixaRoleta_2):
-        self.faixaRoleta = '[ '+ faixaRoleta_1 + ' - ' + faixaRoleta_1 +' ]'
+        #print('Roleta 1: ' + str(faixaRoleta_1) + '  Roleta 2: ' + str(faixaRoleta_2))
+        self.faixaRoleta.append(faixaRoleta_1)
+        self.faixaRoleta.append(faixaRoleta_2)
+        #print('Tamanho da lista: ' + str(self.faixaRoleta))
     
     def getFaixaRoleta(self):
         return self.faixaRoleta
     
-    def mutarBit(self):
-        pass
+    ''' Faz a mutação (ou não) do cromossomo a partir da taxa de mutação. '''
+    def mutarBit(self, taxaMutacao):
+        for i in range(len(self.cromossomo)):
+            if random() < taxaMutacao:
+                if self.cromossomo[i] == '1':
+                    self.cromossomo[i] = '0'
+                else:
+                    self.cromossomo[i] = '1'
     
     def printCromossomo(self):
-        print('Cromossomo: ' + self.cromossomo + 'Fenotipo' + self.fenotipo + ' Fitness: ' + self.fitness + 
-              ' Porcentagem: ' + self.fitnessPercent + '%' + ' Roleta: ' + self.faixaRoleta)
+        #print('Cromossomo: ' + str(self.cromossomo) + ' Fenotipo: ' + str(self.fenotipo) + ' Fitness: ' + str(self.fitness) + 
+        #      ' Porcentagem: ' + str(self.fitnessPercent) + '%' + ' Roleta: ' + str(self.getFaixaRoleta[0]))
+        
+        print('Cromossomo: {} Fenotipo: {} Fitness: {} Porcentagem: {}% Roleta: {}'. format(self.cromossomo, self.fenotipo,
+                                                                  self.fitness, self.fitnessPercent, self.faixaRoleta))
