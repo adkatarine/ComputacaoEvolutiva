@@ -7,16 +7,18 @@ Created on Fri Sep 25 17:47:37 2020
 from Individuo import Individuo
 import math
 
-class Populacao():
+class Populacao:
     
-    def __init__(self):
+    def __init__(self, numPopulacao):
         self.listaDeIndividuos = []
         self.mediaPopulacao = 0
-            
-    ''' Cria uma população de individuos. a quantidade de individuos é recebida por parâmetro. '''
-    def setListaDeIndividuos(self, numPopulacao):
+        
+        # Cria uma população de individuos. a quantidade de individuos é recebida por parâmetro.
         for i in range(numPopulacao):
             self.listaDeIndividuos.append(Individuo())
+            
+    def setListaDeIndividuos(self, listaDeIndividuos):
+        self.listaDeIndividuos = listaDeIndividuos
     
     def getListaDeIndividuos(self):
         return self.listaDeIndividuos
@@ -28,16 +30,19 @@ class Populacao():
 
         for individuo in self.listaDeIndividuos:
             x = individuo.getFenotipo()
-            y = round(100 + (x - math.sin(math.sqrt(abs(x)))))
+            #y = round(100 + (x - math.sin(math.sqrt(abs(x)))))
+            y = round( (10*(x**2)) + (2*x) + 30)
             individuo.setFitness(y)
             fitnessTotal = fitnessTotal + y
         
         for individuo in self.listaDeIndividuos:
             individuo.setFitnessPercent(self.calcularFitnessPercent(individuo.getFitness, fitnessTotal))
     
+    
     ''' Calcula e retorna a porcentagem do fitness. '''
     def calcularFitnessPercent(self, fitness, fitnessTotal):
         return (fitness*100)/fitnessTotal
+    
     
     ''' Organiza a população em ordem decrescente da porcentagem de fitness para determinar
     a faixa da roleta. '''
@@ -57,4 +62,5 @@ class Populacao():
         return self.mediaPopulacao
 
     def printPopulacao(self):
-        print('Média da população: ' + self.mediaPopulacao)
+        for individuo in self.getListaDeIndividuos():
+            individuo.printCromossomo()

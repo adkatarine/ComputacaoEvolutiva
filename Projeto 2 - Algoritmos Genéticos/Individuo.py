@@ -16,14 +16,17 @@ class Individuo():
         self.fitness = 0
         self.fitnessPercent = 0
         self.faixaRoleta = 0
-    
-    ''' Inicia o cromossomo com 8 genes e valores aleatórios. '''
-    def setCromossomo(self):
+        
         for i in range(8):
             if(random() < 0.5):
                 self.cromossomo.append('0')
             else:
                 self.cromossomo.append('1')
+        self.setFenotipo(self.cromossomo)
+    
+    ''' Inicia o cromossomo com 8 genes e valores aleatórios. '''
+    def setCromossomo(self, cromossomo):
+        self.cromossomo = cromossomo
         self.setFenotipo(self.cromossomo)
     
     def getCromossomo(self):
@@ -60,7 +63,7 @@ class Individuo():
         return self.fitnessPercent
     
     def setFaixaRoleta(self, faixaRoleta_1, faixaRoleta_2):
-        self.faixaRoleta = '[' + faixaRoleta_1 + '   ' + faixaRoleta_1 + ']'
+        self.faixaRoleta = '[ '+ faixaRoleta_1 + ' - ' + faixaRoleta_1 +' ]'
     
     def getFaixaRoleta(self):
         return self.faixaRoleta
@@ -69,5 +72,5 @@ class Individuo():
         pass
     
     def printCromossomo(self):
-        print('Cromossomo: ' + self.cromossomo + ' Fitness: ' + self.fitness + 
+        print('Cromossomo: ' + self.cromossomo + 'Fenotipo' + self.fenotipo + ' Fitness: ' + self.fitness + 
               ' Porcentagem: ' + self.fitnessPercent + '%' + ' Roleta: ' + self.faixaRoleta)
