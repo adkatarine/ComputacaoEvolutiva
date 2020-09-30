@@ -33,7 +33,6 @@ class Populacao:
             y = (10*(x**2)) + (2*x) + 30
             individuo.setFitness(y)
             self.fitnessTotal = self.fitnessTotal + y
-        print('TOTAL FITNESS: ' + str(self.fitnessTotal))
         for individuo in self.listaDeIndividuos:
             individuo.setFitnessPercent(self.calcularFitnessPercent(individuo.getFitness()))
     
