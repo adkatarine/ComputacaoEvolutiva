@@ -27,7 +27,7 @@ class AlgoritmoGenetico():
         self.populacao.calcularRangeRoleta()
         self.populacao.printPopulacao()
         print('\n')
-        for i in range(self.geracoes):
+        for i in range(self.geracoes-1):
             print('GERAÇÃO {}'.format(i+2))
             self.populacao.setListaDeIndividuos(self.crossover())
         
@@ -37,8 +37,11 @@ class AlgoritmoGenetico():
             self.populacao.mediaPopulacao = 0
             self.populacao.calcularRangeRoleta()
             self.populacao.printPopulacao()
-            print('\n')
+            print('\n\n')
         
+        print('OS 10 MELHORES RESULTADOS: \n')
+        for i in range(10):
+            self.populacao.getListaDeIndividuos()[i].printCromossomo()
         
         self.plotGraficos()
         
