@@ -19,9 +19,9 @@ class Individuo:
         
         for i in range(8):
             if(random() < 0.5):
-                self.cromossomo.append(0)
+                self.cromossomo.append('0')
             else:
-                self.cromossomo.append(1)
+                self.cromossomo.append('1')
         self.setFenotipo(self.cromossomo)
     ''' Inicia o cromossomo com 8 genes e valores aleatórios. '''
     def setCromossomo(self, cromossomo):
@@ -33,15 +33,9 @@ class Individuo:
     
     ''' Calcula o fenotipo a partir do cromossomo. '''
     def setFenotipo(self, cromossomo):
-        decimal = 0
-        for i in range(len(cromossomo)):
-            if cromossomo[i] == 1:
-                decimal = decimal + (2**i)
-        self.fenotipo = decimal
-        #cromossomo = ['0', '0', '0', '0', '0', '0', '1', '0']
-        #decimal ='' 
-        #decimal = decimal.join(cromossomo)
-        #self.fenotipo = int(decimal, 2)
+        bits ='' 
+        bits = bits.join(cromossomo)
+        self.fenotipo = int(bits, 2)
     
     def getFenotipo(self):
         return self.fenotipo
@@ -77,12 +71,11 @@ class Individuo:
     ''' Faz a mutação(ou não) do cromossomo a partir da taxa de mutação. '''
     def mutarBit(self, taxaMutacao):
         for i in range(len(self.cromossomo)):
-            if random() < taxaMutacao:
-                if self.cromossomo[i] == 1:
-                    self.cromossomo[i] = 0
+            if(random() < taxaMutacao):
+                if self.cromossomo[i] == '1':
+                    self.cromossomo[i] = '0'
                 else:
-                    self.cromossomo[i] = 1
-        self.setFenotipo(self.cromossomo)
+                    self.cromossomo[i] = '1'
     
     def printCromossomo(self):
         print('Cromossomo: {}  Fenotipo: {}  Fitness: {}  Porcentagem: {}%  Roleta: {}'. format(self.cromossomo, self.fenotipo,

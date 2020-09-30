@@ -15,7 +15,7 @@ class AlgoritmoGenetico():
     
     def __init__(self):
         self.taxaCrossover = 0.8
-        self.taxaMutacao = 0.4
+        self.taxaMutacao = 0.1
         self.geracoes = 100
         self.numPopulacao = 100
         
@@ -27,16 +27,15 @@ class AlgoritmoGenetico():
         self.populacao.calcularRangeRoleta()
         self.populacao.printPopulacao()
         print('\n')
-        for i in range(self.geracoes-1):
+        for i in range(self.geracoes):
             print('GERAÇÃO {}'.format(i+2))
             self.populacao.setListaDeIndividuos(self.crossover())
+        
+            self.mutacao()
             self.populacao.fitnessTotal = 0
             self.populacao.calcularFitness()
             self.populacao.mediaPopulacao = 0
             self.populacao.calcularRangeRoleta()
-        
-            if(self.taxaMutacao != 0):
-                self.mutacao()
             self.populacao.printPopulacao()
             print('\n')
         
@@ -58,7 +57,6 @@ class AlgoritmoGenetico():
     ''' Cruzamento entre dois pais para criação de dois filhos. '''
     def crossover(self):
         novaGeracao = []
-        #n= int(self.numPopulacao/2)
         for i in range(int(self.numPopulacao/2)):
             individuo_1 = self.roleta()
             individuo_2 = self.roleta()
@@ -87,6 +85,7 @@ class AlgoritmoGenetico():
         for individuo in self.populacao.getListaDeIndividuos():
             individuo.mutarBit(self.taxaMutacao)
     
+    ''' FUNÇÕES DO GRÁFICO. '''
     def funcao1(self, x):
         return 100 + math.fabs(x * math.sin(math.sqrt(math.fabs(x))))
    
@@ -108,16 +107,12 @@ class AlgoritmoGenetico():
         plt.stem(x_populacao, y_populacao, use_line_collection=True)
     
     def plotGraficos(self):
-        plt.title(self.geracoes, fontdict=None, loc='center', pad=None)
+        plt.title('Gerações', fontdict=None, loc='center', pad=None)
         self.plotFuncao1()
         self.plotPop()
-        plt.plot(self.populacao.getMediaPopulacao(), color='b', linewidth=1.0)
         plt.show()
         
-    def plotMedia(self):
-        plt.plot(self.populacao.getMediaPopulacao(), color='b', linewidth=1.0)
-        plt.show()
     
-
+''' INICIALIZANDO AG. '''
 AG = AlgoritmoGenetico()
 AG.executarAG()
