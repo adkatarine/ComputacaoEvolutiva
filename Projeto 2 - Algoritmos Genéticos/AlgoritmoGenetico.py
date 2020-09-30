@@ -15,13 +15,12 @@ class AlgoritmoGenetico():
     
     def __init__(self):
         self.taxaCrossover = 0.8
-        self.taxaMutacao = 0.1
+        self.taxaMutacao = 0
         self.geracoes = 100
         self.numPopulacao = 100
         
         self.populacao = Populacao(self.numPopulacao)
     
-    ''' '''
     def executarAG(self):
         print('GERAÇÃO 1')
         self.populacao.calcularRangeRoleta()
@@ -42,6 +41,9 @@ class AlgoritmoGenetico():
         print('OS 10 MELHORES RESULTADOS: \n')
         for i in range(10):
             self.populacao.getListaDeIndividuos()[i].printCromossomo()
+        
+        print('Média de Aptidão da População: \n')
+        print(self.populacao.getMediaPopulacao())
         
         self.plotGraficos()
         

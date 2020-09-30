@@ -1,0 +1,52 @@
+Adlla Katarine Aragão Cruz Passos
+
+Foram observados os 10 melhores individuos de cada teste feito.
+
+– Taxa de crossover = 0.8 e Taxa de mutação = 0.1 (Todos cruzam e todos multam).
+- Média de Aptidão da População:484186.64
+
+Cromossomo: ['1', '1', '1', '1', '1', '1', '1', '1']  Fenotipo: 255  Fitness: 650790  Porcentagem: 1.344089130588155%  Roleta: [0, 1.344089130588155]
+Cromossomo: ['1', '1', '1', '1', '1', '1', '1', '1']  Fenotipo: 255  Fitness: 650790  Porcentagem: 1.344089130588155%  Roleta: [1.344089130588155, 2.68817826117631]
+Cromossomo: ['0', '1', '1', '0', '0', '1', '1', '1']  Fenotipo: 255  Fitness: 650790  Porcentagem: 1.344089130588155%  Roleta: [2.68817826117631, 4.032267391764465]
+Cromossomo: ['1', '1', '1', '1', '1', '0', '0', '1']  Fenotipo: 255  Fitness: 650790  Porcentagem: 1.344089130588155%  Roleta: [4.032267391764465, 5.37635652235262]
+Cromossomo: ['0', '1', '1', '1', '1', '1', '1', '1']  Fenotipo: 255  Fitness: 650790  Porcentagem: 1.344089130588155%  Roleta: [5.37635652235262, 6.720445652940775]
+Cromossomo: ['1', '1', '1', '1', '1', '1', '1', '1']  Fenotipo: 255  Fitness: 650790  Porcentagem: 1.344089130588155%  Roleta: [6.720445652940775, 8.06453478352893]
+Cromossomo: ['1', '1', '1', '1', '1', '1', '1', '1']  Fenotipo: 255  Fitness: 650790  Porcentagem: 1.344089130588155%  Roleta: [8.06453478352893, 9.408623914117086]
+Cromossomo: ['1', '1', '1', '1', '1', '1', '1', '1']  Fenotipo: 255  Fitness: 650790  Porcentagem: 1.344089130588155%  Roleta: [9.408623914117086, 10.752713044705242]
+Cromossomo: ['1', '1', '1', '1', '1', '1', '1', '1']  Fenotipo: 255  Fitness: 650790  Porcentagem: 1.344089130588155%  Roleta: [10.752713044705242, 12.096802175293398]
+Cromossomo: ['1', '1', '1', '1', '1', '1', '1', '0']  Fenotipo: 254  Fitness: 645698  Porcentagem: 1.3335725248428993%  Roleta: [12.096802175293398, 13.430374700136298]
+
+
+
+
+– Taxa de crossover = 0.8 e Taxa de mutação = 0 (Apenas crossover).
+- Média de Aptidão da População: 593058.04
+
+
+Cromossomo: ['1', '1', '1', '1', '0', '1', '0', '0']  Fenotipo: 244  Fitness: 595878  Porcentagem: 1.0047549477619424%  Roleta: [0, 1.0047549477619424]
+Cromossomo: ['1', '1', '1', '1', '0', '1', '0', '0']  Fenotipo: 244  Fitness: 595878  Porcentagem: 1.0047549477619424%  Roleta: [1.0047549477619424, 2.009509895523885]
+Cromossomo: ['1', '1', '1', '1', '0', '1', '0', '0']  Fenotipo: 244  Fitness: 595878  Porcentagem: 1.0047549477619424%  Roleta: [2.009509895523885, 3.0142648432858272]
+Cromossomo: ['1', '1', '1', '1', '0', '1', '0', '0']  Fenotipo: 244  Fitness: 595878  Porcentagem: 1.0047549477619424%  Roleta: [3.0142648432858272, 4.01901979104777]
+Cromossomo: ['1', '1', '1', '1', '0', '1', '0', '0']  Fenotipo: 244  Fitness: 595878  Porcentagem: 1.0047549477619424%  Roleta: [4.01901979104777, 5.023774738809712]
+Cromossomo: ['1', '1', '1', '1', '0', '1', '0', '0']  Fenotipo: 244  Fitness: 595878  Porcentagem: 1.0047549477619424%  Roleta: [5.023774738809712, 6.028529686571654]
+Cromossomo: ['1', '1', '1', '1', '0', '1', '0', '0']  Fenotipo: 244  Fitness: 595878  Porcentagem: 1.0047549477619424%  Roleta: [6.028529686571654, 7.0332846343335955]
+Cromossomo: ['1', '1', '1', '1', '0', '1', '0', '0']  Fenotipo: 244  Fitness: 595878  Porcentagem: 1.0047549477619424%  Roleta: [7.0332846343335955, 8.038039582095537]
+Cromossomo: ['1', '1', '1', '1', '0', '1', '0', '0']  Fenotipo: 244  Fitness: 595878  Porcentagem: 1.0047549477619424%  Roleta: [8.038039582095537, 9.04279452985748]
+Cromossomo: ['1', '1', '1', '1', '0', '1', '0', '0']  Fenotipo: 244  Fitness: 595878  Porcentagem: 1.0047549477619424%  Roleta: [9.04279452985748, 10.047549477619421]
+
+
+
+
+– Taxa de crossover = 0 e Taxa de mutação = 0.1 (Apenas mutação).
+- Média de Aptidão da População: 640626.0
+
+Cromossomo: ['1', '0', '0', '1', '1', '0', '1', '1']  Fenotipo: 253  Fitness: 640626  Porcentagem: 1.0%  Roleta: [99.0, 100.0]
+Cromossomo: ['1', '0', '0', '1', '1', '0', '1', '1']  Fenotipo: 253  Fitness: 640626  Porcentagem: 1.0%  Roleta: [99.0, 100.0]
+Cromossomo: ['1', '0', '0', '1', '1', '0', '1', '1']  Fenotipo: 253  Fitness: 640626  Porcentagem: 1.0%  Roleta: [99.0, 100.0]
+Cromossomo: ['1', '0', '0', '1', '1', '0', '1', '1']  Fenotipo: 253  Fitness: 640626  Porcentagem: 1.0%  Roleta: [99.0, 100.0]
+Cromossomo: ['1', '0', '0', '1', '1', '0', '1', '1']  Fenotipo: 253  Fitness: 640626  Porcentagem: 1.0%  Roleta: [99.0, 100.0]
+Cromossomo: ['1', '0', '0', '1', '1', '0', '1', '1']  Fenotipo: 253  Fitness: 640626  Porcentagem: 1.0%  Roleta: [99.0, 100.0]
+Cromossomo: ['1', '0', '0', '1', '1', '0', '1', '1']  Fenotipo: 253  Fitness: 640626  Porcentagem: 1.0%  Roleta: [99.0, 100.0]
+Cromossomo: ['1', '0', '0', '1', '1', '0', '1', '1']  Fenotipo: 253  Fitness: 640626  Porcentagem: 1.0%  Roleta: [99.0, 100.0]
+Cromossomo: ['1', '0', '0', '1', '1', '0', '1', '1']  Fenotipo: 253  Fitness: 640626  Porcentagem: 1.0%  Roleta: [99.0, 100.0]
+Cromossomo: ['1', '0', '0', '1', '1', '0', '1', '1']  Fenotipo: 253  Fitness: 640626  Porcentagem: 1.0%  Roleta: [99.0, 100.0]
