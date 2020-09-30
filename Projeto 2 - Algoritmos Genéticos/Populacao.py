@@ -4,7 +4,7 @@ Created on Fri Sep 25 17:47:37 2020
 
 @author: adlla
 """
-#import Individuo as ind
+
 from Individuo import Individuo
 
 class Populacao:
@@ -30,7 +30,6 @@ class Populacao:
     def calcularFitness(self):
         for individuo in self.getListaDeIndividuos():
             x = individuo.getFenotipo()
-            #y = round( (10*(x**2)) + (2*x) + 30)
             y = (10*(x**2)) + (2*x) + 30
             individuo.setFitness(y)
             self.fitnessTotal = self.fitnessTotal + y
@@ -47,10 +46,7 @@ class Populacao:
     ''' Organiza a população em ordem decrescente da porcentagem de fitness para determinar
     a faixa da roleta. '''
     def calcularRangeRoleta(self):
-        #self.setListaDeIndividuos(sorted(self.getListaDeIndividuos(), key = Individuo.getFitnessPercent(), reverse=True))
-        #self.listaDeIndividuos = sorted(self.getListaDeIndividuos(), key = ind.Individuo.getFitnessPercent(), reverse=True)
-        listaOrdenada = sorted(self.getListaDeIndividuos(), key = Individuo.getFitnessPercent, reverse=True)
-        self.setListaDeIndividuos(listaOrdenada)
+        self.setListaDeIndividuos(sorted(self.getListaDeIndividuos(), key = Individuo.getFitnessPercent, reverse=True))
         valorSomaFitnessMinimo = 0
         valorSomaFitnessMaximo = 0
         
@@ -62,14 +58,6 @@ class Populacao:
             
             valorSomaFitnessMinimo = valorSomaFitnessMinimo + fitnessPercentAtual
     
-    '''
-    roleta = 0
-        for i in range(len(self.individuos)):
-            esquerda = roleta
-            direita = roleta + self.individuos[i].fitnessPercent
-            self.individuos[i].faixaRoleta = [esquerda, direita] 
-            roleta += self.individuos[i].fitnessPercent
-    '''
     
     ''' Retorna a média de aptidão da população. '''
     def getMediaPopulacao(self):
