@@ -7,6 +7,7 @@ Created on Fri Sep 25 17:47:37 2020
 
 from Individuo import Individuo
 import math
+import numpy as np
 
 class Populacao:
     
@@ -14,12 +15,12 @@ class Populacao:
         self.listaDeIndividuos = []
         self.mediaPopulacao = 0
         self.fitnessTotal = 0
-        self.coordenadas = []
         
         # Cria uma população de individuos. a quantidade de individuos é recebida por parâmetro.
         for i in range(numPopulacao):
             self.listaDeIndividuos.append(Individuo())
         self.coordenadaCidades()
+        self.calcularFitness()
          
     def setListaDeIndividuos(self, listaDeIndividuos):
         self.listaDeIndividuos = listaDeIndividuos
@@ -28,24 +29,8 @@ class Populacao:
         return self.listaDeIndividuos
     
     def coordenadaCidades(self):
-        cidade1 = {"1": 1, "x": 100, "y": 150}
-        cidade2 = {"2": 2, "x": 120, "y": 170}
-        cidade3 = {"3": 3, "x": 90, "y": 100}
-        cidade4 = {"4": 4, "x": 200, "y": 80}
-        cidade5 = {"5": 5, "x": 110, "y": 110}
-        cidade6 = {"6": 6, "x": 60, "y": 20}
-        cidade7 = {"7": 7, "x": 160, "y": 40}
-        cidade8 = {"8": 8, "x": 70, "y": 80}
-        
-        self.coordenadas.append(cidade1)
-        self.coordenadas.append(cidade2)
-        self.coordenadas.append(cidade3)
-        self.coordenadas.append(cidade4)
-        self.coordenadas.append(cidade5)
-        self.coordenadas.append(cidade6)
-        self.coordenadas.append(cidade7)
-        self.coordenadas.append(cidade8)
-        
+        self.x = np.array([300, 150, 200, 115, 100, 250, 285, 150, 200, 115])
+        self.y = np.array([200, 115, 300, 150, 200, 285, 250, 290, 100, 250])
     
     ''' Calcula o fitness de cada individuo, obtendo o fitness total de todos os individuos
     para calcular o fitness percent. '''
@@ -55,19 +40,13 @@ class Populacao:
             
             somaFitness = 0
             for i in range(len(cromossomo)-1):
-                x1 = self.coordenadas[cromossomo[i]-1]['x']
-                x2 = self.coordenadas[cromossomo[i+1]-1]['x']
-                y1 = self.coordenadas[cromossomo[i]-1]['y']
-                y2 = self.coordenadas[cromossomo[i+1]-1]['y']
-                
-                distancia = math.sqrt(abs(((x2 - x1)**2) + ((y2 - y1)**2)))
+
+                distancia = math.sqrt(abs(((self.x[i+1] - self.x[i])**2) + ((self.y[i+1] - self.y[i])**2)))
                 somaFitness = somaFitness + distancia
-            #individuo.setFitness(somaFitness**(-1))
-            individuo.setFitness(somaFitness)
-            self.fitnessTotal = self.fitnessTotal + somaFitness
+            individuo.setFitness(1/somaFitness)
+            self.fitnessTotal = self.fitnessTotal + (1/somaFitness)
         for individuo in self.listaDeIndividuos:
             individuo.setFitnessPercent(self.calcularFitnessPercent(individuo.getFitness()))
-    
     
     ''' Calcula e retorna a porcentagem do fitness. '''
     def calcularFitnessPercent(self, fitness):

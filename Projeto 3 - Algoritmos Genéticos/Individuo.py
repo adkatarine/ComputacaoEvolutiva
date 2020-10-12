@@ -17,7 +17,7 @@ class Individuo:
         self.fitnessPercent = 0
         self.faixaRoleta = []
         
-        self.cromossomo = sample(range(1, 9), 8)   
+        self.cromossomo = sample(range(1, 11), 10)   
 
     def setCromossomo(self, cromossomo):
         self.cromossomo = cromossomo
@@ -56,10 +56,13 @@ class Individuo:
     ''' Faz a mutação(ou não) do cromossomo a partir da taxa de mutação. '''
     def mutacao(self, taxaMutacao):
         if(random.random() < taxaMutacao):
-            index1 = random.randint(1, 7)
+            index1 = random.randint(0, 9)
             index2 = index1
             while(index2 == index1):
-                index2 = random.randint(1, 7)
+                index2 = random.randint(0, 9)
+            print('CROMOSSOMO: ' + str(self.cromossomo))
+            print('index1: ' + str(index1))
+            print('index2: ' + str(index2))
             valorIndex1 = self.cromossomo[index1]
             self.cromossomo[index1] = self.cromossomo[index2]
             self.cromossomo[index2] = valorIndex1
