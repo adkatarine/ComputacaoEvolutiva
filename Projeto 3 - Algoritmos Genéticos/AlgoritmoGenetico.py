@@ -58,9 +58,7 @@ class AlgoritmoGenetico():
         novaGeracao = []
          
         for i in range(self.qtdElite):
-            print('TAMANHO DA POP: ' + str(len(self.populacao.getListaDeIndividuos())))
             novaGeracao.append(self.populacao.getListaDeIndividuos().pop())
-            print('TAMANHO DA POP: ' + str(len(self.populacao.getListaDeIndividuos())))
         return self.crossover_BaseadoEmOrdem(novaGeracao)
  
           
@@ -121,8 +119,8 @@ class AlgoritmoGenetico():
         for individuo in self.populacao.getListaDeIndividuos():
             individuo.mutacao(self.taxaMutacao)
     
-    ''' FUNÇÕES DO GRÁFICO. '''
     
+    ''' FUNÇÕES DO GRÁFICO. '''
     def printGrafico(self, x, y, ordem, geracao, media):
         plt.title(geracao, fontdict=None, loc='center', pad=None)
         self.printPontos(x, y)

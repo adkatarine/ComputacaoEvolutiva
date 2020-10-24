@@ -60,9 +60,6 @@ class Individuo:
             index2 = index1
             while(index2 == index1):
                 index2 = random.randint(0, 9)
-            print('CROMOSSOMO: ' + str(self.cromossomo))
-            print('index1: ' + str(index1))
-            print('index2: ' + str(index2))
             valorIndex1 = self.cromossomo[index1]
             self.cromossomo[index1] = self.cromossomo[index2]
             self.cromossomo[index2] = valorIndex1
