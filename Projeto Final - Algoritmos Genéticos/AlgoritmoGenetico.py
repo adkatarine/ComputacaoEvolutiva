@@ -26,6 +26,7 @@ class AlgoritmoGenetico():
         self.melhorSolucao = None
         
         self.populacao = Populacao(numPopulacao, limiteEspacos, gastoMaximo)
+        self.melhorSolucao = self.populacao.listaDeIndividuos[0]
     
     def executarAG(self):
         print('GERAÇÃO 1')
@@ -36,13 +37,19 @@ class AlgoritmoGenetico():
             self.populacao.setListaDeIndividuos(self.elitista())
         
             self.mutacao()
-            #self.populacao.fitnessTotal = 0
             self.populacao.avaliar()
             self.populacao.ordernarPopulacao()
             self.populacao.printPopulacao()
+            self.melhorSolucao = self.populacao.melhorIndividuo(self.melhorSolucao)
             print('\n\n')
-    
-    
+            
+        print('MELHOR SOLUÇÃO ENCONTRADA:')
+        self.printMelhorSolucao(self.melhorSolucao)
+        print()
+        print('MELHOR SOLUÇÃO ENCONTRADA NA GERAÇÃO ATUAL:')
+        self.printMelhorSolucao(self.populacao.listaDeIndividuos[0])
+        
+        
     def selecionarTorneio(self):
         """
             Realiza a seleção do individuo mais apto por torneio, considerando N = 2
@@ -97,15 +104,27 @@ class AlgoritmoGenetico():
         for individuo in self.populacao.listaDeIndividuos:
             individuo.mutarBit(self.taxaMutacao, len(self.populacao.listaJogos))
 
+    def printMelhorSolucao(self, melhorSolucao):
+        print("GERAÇÃO: " + str(melhorSolucao.geracao))
+        melhorSolucao.printCromossomo()
+        print()
+        qtdGenes = len(melhorSolucao.cromossomo)
+        cromossomo = melhorSolucao.cromossomo
+        for i in range(qtdGenes):
+            if cromossomo[i] == 1:
+                print('Jogo: {}  Espaço: {}  Preço: {}  Valor: {}'. format(self.populacao.listaJogos[i].nome, self.populacao.listaJogos[i].espaco, self.populacao.listaJogos[i].preco, self.populacao.listaJogos[i].valor))
+    
                                
 if __name__ == '__main__':
+    
     TAXA_CROSSOVER = 0.8
-    TAXA_MUTACAO = .6
+    TAXA_MUTACAO = 0.6
     GERACOES = 100
     NUM_POPULACAO = 100
-    LIMITE_ESPACO = [2.4,3]
-    GASTO_MAXIMO = 15000.00
-    QTD_ELITE = 20
+    LIMITE_ESPACO = [2.4, 3]
+    GASTO_MAXIMO = 10000.00
+    QTD_ELITE = 30
+    
     ''' INICIALIZANDO AG. '''
     AG = AlgoritmoGenetico(TAXA_CROSSOVER, TAXA_MUTACAO, GERACOES, NUM_POPULACAO, LIMITE_ESPACO, GASTO_MAXIMO, QTD_ELITE)
     AG.executarAG()

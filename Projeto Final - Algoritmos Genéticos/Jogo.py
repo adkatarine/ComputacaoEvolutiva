@@ -7,10 +7,10 @@ Created on Wed Oct 21 14:16:16 2020
 
 class Jogo():
     
-    def __init__(self, nome, espaco, preco, prioridade = 0):
+    def __init__(self, nome, espaco, preco, valor):
         self.nome = nome
         self.espaco = espaco
         self.preco = preco
-        self.prioridade = prioridade
+        self.valor = valor
         
         

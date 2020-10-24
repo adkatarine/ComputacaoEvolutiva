@@ -22,9 +22,9 @@ class Individuo():
         
         for i in range(qtdJogos):
             if random() < 0.5:
-                self.cromossomo.append('0')
+                self.cromossomo.append(0)
             else:
-                self.cromossomo.append('1')
+                self.cromossomo.append(1)
                 
     def setCromossomo(self, cromossomo):
         self.cromossomo = cromossomo
@@ -51,10 +51,10 @@ class Individuo():
     def mutarBit(self, taxaMutacao, qtdJogos):
         if(random() < taxaMutacao):
             i = randint(0, qtdJogos-1)
-            if self.cromossomo[i] == '1':
-                self.cromossomo[i] = '0'
+            if self.cromossomo[i] == 1:
+                self.cromossomo[i] = 0
             else:
-                self.cromossomo[i] = '1'
+                self.cromossomo[i] = 1
     
     def printCromossomo(self):
         print('Cromossomo: {}  Fitness: {} Espaço Usado: {} Valor Gasto: {}'. format(self.cromossomo,

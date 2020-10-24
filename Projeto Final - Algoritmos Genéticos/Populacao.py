@@ -26,42 +26,44 @@ class Populacao():
         for i in range(numPopulacao):
             self.listaDeIndividuos.append(Individuo(len(self.espacos)))
         self.avaliar()
-        #self.ordernarPopulacao()
+        self.ordernarPopulacao()
     
     
     def criarListaJogos(self):
         self.listaJogos.append(Jogo("Mesa de Sinuca", 0.751, 999.90, 5))
-        self.listaJogos.append(Jogo("Máquina de Pinball", 0.199, 2911.12, 3))
+        self.listaJogos.append(Jogo("Máquina de Pinball", 0.199, 2911.12, 2))
         self.listaJogos.append(Jogo("Pebolim", 0.400, 1346.99, 3))
-        self.listaJogos.append(Jogo("Pingue-Pongue' ", 0.390, 2999.90, 2))
-        self.listaJogos.append(Jogo("Mesa de Jogo Poker/Truco' ", 0.300, 1999.00, 5))
+        self.listaJogos.append(Jogo("Pingue-Pongue", 0.390, 2999.90, 3))
+        self.listaJogos.append(Jogo("Mesa de Jogo Poker/Truco", 0.300, 1999.00, 5))
         self.listaJogos.append(Jogo("Mesa de Hockey", 0.350, 2499.90, 3))
         self.listaJogos.append(Jogo("Mesa de Xadrez", 0.596, 499.90, 4))
-        self.listaJogos.append(Jogo("Mesa de Futebol de Botão", 0.0499, 508.66, 2))
+        self.listaJogos.append(Jogo("Mesa de Futebol de Botão", 0.0499, 508.66, 1))
         self.listaJogos.append(Jogo("Máquina de Fliperama", 0.0599, 429.90, 4))
-        self.listaJogos.append(Jogo("Mesa Arcade", 0.319, 499.29, 1))
-        self.listaJogos.append(Jogo("Boliche", 0.835, 849.00, 2))
+        self.listaJogos.append(Jogo("Mesa Arcade", 0.319, 499.29, 2))
+        self.listaJogos.append(Jogo("Boliche", 0.835, 849.00, 4))
+        
 
     def copiarAtributosJogos(self):
         for jogo in self.listaJogos:
             print(jogo.nome)
             self.espacos.append(jogo.espaco)
-            self.valores.append(jogo.prioridade)
+            self.valores.append(jogo.valor)
             self.precos.append(jogo.preco)
             
     
     def melhorIndividuo(self, melhorSolucao):
-        for individuo in self.listaDeIndividuos:
-            if individuo.fitness > melhorSolucao.fitness:
-                melhorSolucao = individuo
+        if self.listaDeIndividuos[0].getFitness() > melhorSolucao.fitness:
+            melhorSolucao = self.listaDeIndividuos[0]
         return melhorSolucao
-        
+    
+    
     def setListaDeIndividuos(self, listaDeIndividuos):
         self.listaDeIndividuos = listaDeIndividuos
     
     
     def ordernarPopulacao(self):
         self.setListaDeIndividuos(sorted(self.listaDeIndividuos, key = Individuo.getFitness, reverse=True))
+
     
     def avaliar(self):
         for individuo in self.listaDeIndividuos:
@@ -71,16 +73,13 @@ class Populacao():
             precoTotal = 0
         
             for i in range(len(cromossomo)):
-                if cromossomo[i] == '1':
-                    fitness += self.valores[i]
+                if cromossomo[i] == 1:
+                    fitness += self.valores[i]*self.espacos[i]
                     espacoUsado += self.espacos[i]
                     precoTotal += self.precos[i]
             
-            #print(precoTotal)
             if ((espacoUsado < self.limiteEspacos[0] or espacoUsado > self.limiteEspacos[1]) or precoTotal > self.gastoMaximo):
                 fitness = 1
-            elif(espacoUsado >= self.limiteEspacos[0] or espacoUsado <= self.limiteEspacos[1]):
-                fitness += 5
             individuo.setEspacoUsado(espacoUsado)
             individuo.setFitness(fitness)
             individuo.setPrecoTotal(precoTotal)
