@@ -40,7 +40,7 @@ class AlgoritmoGenetico():
             
         print('MELHOR SOLUÇÃO ENCONTRADA:')
         self.printMelhorSolucao(self.melhorSolucao)
-        print()
+        print('\n\n')
         print('MELHOR SOLUÇÃO ENCONTRADA NA GERAÇÃO ATUAL:')
         self.printMelhorSolucao(self.populacao.listaDeIndividuos[0])
         
@@ -64,7 +64,6 @@ class AlgoritmoGenetico():
          
         for i in range(self.qtdElite):
             novaGeracao.append(self.populacao.listaDeIndividuos.pop())
-            print(len(novaGeracao))
             self.numPopulacao = len(self.populacao.listaDeIndividuos)
         return self.crossover(novaGeracao)
     
