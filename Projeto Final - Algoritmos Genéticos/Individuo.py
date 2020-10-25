@@ -10,10 +10,10 @@ from random import random
 
 class Individuo():
     
-    def __init__(self, qtdJogos, geracao=0):
-        #self.espacos = espacos
-        #self.valores = valores
-        #self.limiteEspacos = limiteEspacos # limite mínimo e máximo que poderá ser usado
+    def __init__(self, espacos, precos, valores, qtdJogos, geracao=0):
+        self.espacos = espacos
+        self.valores = valores
+        self.precos = precos
         self.fitness = 0
         self.espacoUsado = 0
         self.precoTotal = 0
@@ -46,6 +46,23 @@ class Individuo():
     def setGeracao(self, geracao):
         self.geracao = geracao + 1
     
+    ''' Função de avaliação do indivíduo. Calcula o fitness atual e verifica se os limites de espaço e valor
+    máximo gasto para compra foram ultrapassados. Caso tenha sido o valor do fitness será 1.'''
+    def avaliar(self, limiteEspacos, gastoMaximo):
+        fitness = 0
+        espacoUsado = 0
+        precoTotal = 0
+        for i in range(len(self.cromossomo)):
+            if self.cromossomo[i] == 1:
+                    fitness += self.valores[i]*self.espacos[i]
+                    espacoUsado += self.espacos[i]
+                    precoTotal += self.precos[i]
+                    
+        if ((espacoUsado < limiteEspacos[0] or espacoUsado > limiteEspacos[1]) or precoTotal > gastoMaximo):
+            fitness = 1
+        self.fitness = fitness
+        self.espacoUsado = espacoUsado
+        self.precoTotal = precoTotal
     
     ''' Faz a mutação(ou não) do cromossomo a partir da taxa de mutação. '''
     def mutarBit(self, taxaMutacao, qtdJogos):

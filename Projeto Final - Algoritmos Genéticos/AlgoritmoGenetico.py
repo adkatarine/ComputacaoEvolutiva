@@ -5,13 +5,10 @@ Created on Thu Oct 22 10:42:00 2020
 @author: adlla
 """
 
-#from Jogo import Jogo
 from Individuo import Individuo
 from Populacao import Populacao
 from random import random
 from random import randint
-#import math
-#import matplotlib.pyplot as plt
 
 class AlgoritmoGenetico():
     
@@ -21,8 +18,6 @@ class AlgoritmoGenetico():
         self.geracoes = geracoes
         self.numPopulacao = numPopulacao
         self.qtdElite  = qtdElite
-        #self.limiteEspacos = limiteEspacos
-        #self.gastoMaximo = gastoMaximo
         self.melhorSolucao = None
         
         self.populacao = Populacao(numPopulacao, limiteEspacos, gastoMaximo)
@@ -50,32 +45,33 @@ class AlgoritmoGenetico():
         self.printMelhorSolucao(self.populacao.listaDeIndividuos[0])
         
         
+    ''' Realiza a seleção do individuo mais apto por torneio, considerando N = 2 '''
     def selecionarTorneio(self):
-        """
-            Realiza a seleção do individuo mais apto por torneio, considerando N = 2
-        """
-        # agrupa os individuos com suas avaliações para gerar os participantes do torneio
-        #participantesTorneio = [zip(self.populacao.listaDeIndividuos, self.populacao.valores)]
-        # escolhe dois individuos aleatoriamente
+
         individuo_1 = self.populacao.listaDeIndividuos[randint(0, self.numPopulacao - 1)]
         individuo_2 = self.populacao.listaDeIndividuos[randint(0, self.numPopulacao - 1)]
+        
         # retorna individuo com a maior avaliação, ou seja, o vencedor do torneio
         if individuo_1.fitness > individuo_2.fitness:
             return individuo_1
         else:
             return individuo_2
     
-    
+    ''' Clona uma quantidade pré-definida dos melhores indivíduos para a próxima geração. '''
     def elitista(self):
         self.populacao.setListaDeIndividuos(sorted(self.populacao.listaDeIndividuos, key = Individuo.getFitness, reverse=True))
         novaGeracao = []
          
         for i in range(self.qtdElite):
             novaGeracao.append(self.populacao.listaDeIndividuos.pop())
+            print(len(novaGeracao))
             self.numPopulacao = len(self.populacao.listaDeIndividuos)
         return self.crossover(novaGeracao)
     
-    ''' Cruzamento entre dois pais para criação de dois filhos. '''
+    
+    ''' Cruzamento entre dois pais para criação de dois filhos. É definido um ponto de corte aleatório em 
+    cada cromossomo e os segmentos de cromossomo criados a partir dos pontos de corte são trocados, criando
+    dois novos indivíduos. '''
     def crossover(self, novaGeracao):
         for i in range(int(self.numPopulacao/2)):
             individuo_1 = self.selecionarTorneio()
@@ -87,7 +83,9 @@ class AlgoritmoGenetico():
                 filho_1 = individuo_2.cromossomo[0:pontoCorte] + individuo_1.cromossomo[pontoCorte::]
                 filho_2 = individuo_1.cromossomo[0:pontoCorte] + individuo_2.cromossomo[pontoCorte::]
                 
-                filhos = [Individuo(len(self.populacao.listaJogos)), Individuo(len(self.populacao.listaJogos))]
+                descricaoJogo = []
+                descricaoJogo = self.populacao.copiarAtributosJogos()
+                filhos = [Individuo(descricaoJogo[0], descricaoJogo[1], descricaoJogo[2], len(self.populacao.listaJogos)), Individuo(descricaoJogo[0], descricaoJogo[1], descricaoJogo[2], len(self.populacao.listaJogos))]
                 filhos[0].setCromossomo(filho_1)
                 filhos[0].setGeracao(individuo_1.geracao)
                 filhos[1].setCromossomo(filho_2)
@@ -104,6 +102,7 @@ class AlgoritmoGenetico():
         for individuo in self.populacao.listaDeIndividuos:
             individuo.mutarBit(self.taxaMutacao, len(self.populacao.listaJogos))
 
+    ''' Print da melhor solução (indivíduo) recebido. '''
     def printMelhorSolucao(self, melhorSolucao):
         print("GERAÇÃO: " + str(melhorSolucao.geracao))
         melhorSolucao.printCromossomo()
@@ -118,12 +117,12 @@ class AlgoritmoGenetico():
 if __name__ == '__main__':
     
     TAXA_CROSSOVER = 0.8
-    TAXA_MUTACAO = 0.6
+    TAXA_MUTACAO = 0.1
     GERACOES = 100
     NUM_POPULACAO = 100
     LIMITE_ESPACO = [2.4, 3]
     GASTO_MAXIMO = 10000.00
-    QTD_ELITE = 30
+    QTD_ELITE = 20
     
     ''' INICIALIZANDO AG. '''
     AG = AlgoritmoGenetico(TAXA_CROSSOVER, TAXA_MUTACAO, GERACOES, NUM_POPULACAO, LIMITE_ESPACO, GASTO_MAXIMO, QTD_ELITE)

@@ -13,18 +13,15 @@ class Populacao():
         self.listaDeIndividuos = []
         self.listaJogos = []
         self.mediaPopulacao = 0
-        self.fitnessTotal = 0
         self.limiteEspacos = limiteEspacos
         self.gastoMaximo = gastoMaximo
-        self.espacos = []
-        self.valores = []
-        self.precos = []
         
         self.criarListaJogos()
-        self.copiarAtributosJogos()
+        descricaoJogo = []
+        descricaoJogo = self.copiarAtributosJogos()
         # Cria uma população de individuos. a quantidade de individuos é recebida por parâmetro.
         for i in range(numPopulacao):
-            self.listaDeIndividuos.append(Individuo(len(self.espacos)))
+            self.listaDeIndividuos.append(Individuo(descricaoJogo[0], descricaoJogo[1], descricaoJogo[2], len(self.listaJogos)))
         self.avaliar()
         self.ordernarPopulacao()
     
@@ -43,14 +40,23 @@ class Populacao():
         self.listaJogos.append(Jogo("Boliche", 0.835, 849.00, 4))
         
 
+    '''  '''
     def copiarAtributosJogos(self):
+        espacos = []
+        valores = []
+        precos = []
+        descricaoJogo = []
         for jogo in self.listaJogos:
-            print(jogo.nome)
-            self.espacos.append(jogo.espaco)
-            self.valores.append(jogo.valor)
-            self.precos.append(jogo.preco)
+            espacos.append(jogo.espaco)
+            valores.append(jogo.valor)
+            precos.append(jogo.preco)
+        descricaoJogo.append(espacos)
+        descricaoJogo.append(precos)
+        descricaoJogo.append(valores)
+        return descricaoJogo
             
-    
+    ''' Compara o melhor indivíduo da geração atual com o melhor indivíduo das gerações anteriores e retorna
+    o melhor entre os dois. '''
     def melhorIndividuo(self, melhorSolucao):
         if self.listaDeIndividuos[0].getFitness() > melhorSolucao.fitness:
             melhorSolucao = self.listaDeIndividuos[0]
@@ -67,22 +73,7 @@ class Populacao():
     
     def avaliar(self):
         for individuo in self.listaDeIndividuos:
-            cromossomo = individuo.cromossomo
-            fitness = 0
-            espacoUsado = 0
-            precoTotal = 0
-        
-            for i in range(len(cromossomo)):
-                if cromossomo[i] == 1:
-                    fitness += self.valores[i]*self.espacos[i]
-                    espacoUsado += self.espacos[i]
-                    precoTotal += self.precos[i]
-            
-            if ((espacoUsado < self.limiteEspacos[0] or espacoUsado > self.limiteEspacos[1]) or precoTotal > self.gastoMaximo):
-                fitness = 1
-            individuo.setEspacoUsado(espacoUsado)
-            individuo.setFitness(fitness)
-            individuo.setPrecoTotal(precoTotal)
+            individuo.avaliar(self.limiteEspacos, self.gastoMaximo)
 
 
     def printPopulacao(self):
